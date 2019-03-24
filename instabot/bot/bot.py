@@ -15,7 +15,7 @@ from .bot_comment import (comment, comment_geotag, comment_hashtag,
 from .bot_delete import delete_comment, delete_media, delete_medias
 from .bot_direct import (send_hashtag, send_like, send_media, send_medias,
                          send_message, send_messages, send_profile)
-from .bot_filter import check_media, check_not_bot, check_user, filter_medias
+from .bot_filter import check_media, check_not_bot, check_user, filter_medias, search_blacklist_hashtags_in_media
 from .bot_follow import (follow, follow_followers, follow_following,
                          follow_users)
 from .bot_get import (convert_to_user_id, get_archived_medias, get_comment,
@@ -55,6 +55,7 @@ class Bot(object):
                  unfollowed_file='unfollowed.txt',
                  skipped_file='skipped.txt',
                  friends_file='friends.txt',
+                 log_file='instabot.log', 
                  proxy=None,
                  max_likes_per_day=1000,
                  max_unlikes_per_day=1000,
@@ -94,7 +95,7 @@ class Bot(object):
                  verbosity=True,
                  device=None
                  ):
-        self.api = API(device=device)
+        self.api = API(log_file=log_file, device=device)
 
         self.total = {'likes': 0,
                       'unlikes': 0,
@@ -619,6 +620,9 @@ class Bot(object):
 
     def check_media(self, media):
         return check_media(self, media)
+    
+    def search_blacklist_hashtags_in_media(self, media):
+        return search_blacklist_hashtags_in_media(self, media)
 
     def check_user(self, user, unfollowing=False):
         return check_user(self, user, unfollowing)

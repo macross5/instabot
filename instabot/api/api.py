@@ -27,7 +27,7 @@ PY2 = sys.version_info[0] == 2
 
 
 class API(object):
-    def __init__(self, device=None):
+    def __init__(self, log_file='instabot.log', device=None):
         # Setup device and user_agent
         device = device or devices.DEFAULT_DEVICE
         self.device_settings = devices.DEVICES[device]
@@ -40,7 +40,7 @@ class API(object):
         # Setup logging
         self.logger = logging.getLogger('[instabot_{}]'.format(id(self)))
 
-        fh = logging.FileHandler(filename='instabot.log')
+        fh = logging.FileHandler(filename=log_file)
         fh.setLevel(logging.INFO)
         fh.setFormatter(logging.Formatter('%(asctime)s %(message)s'))
 
