@@ -183,8 +183,9 @@ class API(object):
             except JSONDecodeError:
                 return False
         else:
-            self.logger.error("Request returns {} error!".format(response.status_code))
-            response_data = json.loads(response.text)
+            response_data = json.loads(response.text)            
+            self.logger.error("Request returns "+str(response.status_code)+" error! endpoint: "+str(endpoint)+", response: "+str(response_data))
+
             if "feedback_required" in str(response_data.get('message')):
                 self.logger.error("ATTENTION!: `feedback_required`, your action could have been blocked")
                 return "feedback_required"
