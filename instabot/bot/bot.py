@@ -4,6 +4,8 @@ import random
 import signal
 import time
 
+import threading
+
 from .. import utils
 from ..api import API
 from .bot_archive import archive, archive_medias, unarchive_medias
@@ -257,7 +259,7 @@ class Bot(object):
         if self.api.login(**args) is False:
             return False
         self.prepare()
-        signal.signal(signal.SIGTERM, self.logout)
+        if threading.current_thread() is threading.main_thread(): signal.signal(signal.SIGTERM, self.logout)
         atexit.register(self.logout)
         return True
 
