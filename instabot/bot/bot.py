@@ -4,8 +4,6 @@ import random
 import signal
 import time
 
-import threading
-
 from .. import utils
 from ..api import API
 from .bot_archive import archive, archive_medias, unarchive_medias
@@ -259,8 +257,14 @@ class Bot(object):
         if self.api.login(**args) is False:
             return False
         self.prepare()
-        if threading.current_thread() is threading.main_thread(): signal.signal(signal.SIGTERM, self.logout)
-        atexit.register(self.logout)
+        
+        try:
+            import threading
+            if threading.current_thread() is threading.main_thread(): signal.signal(signal.SIGTERM, self.logout)
+            atexit.register(self.logout)
+        except Exception as e:
+            self.logger.error("Error in login while preparing the logout: "+str(e))
+            
         return True
 
     def prepare(self):
