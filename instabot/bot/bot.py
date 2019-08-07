@@ -205,13 +205,13 @@ class Bot(object):
         self._usernames = {}  # `username` to `user_id` mapping
 
         # Adjust file paths
-        followed_file = os.path.join(base_path, followed_file)
-        unfollowed_file = os.path.join(base_path, unfollowed_file)
-        skipped_file = os.path.join(base_path, skipped_file)
-        friends_file = os.path.join(base_path, friends_file)
-        comments_file = os.path.join(base_path, comments_file)
-        blacklist_file = os.path.join(base_path, blacklist_file)
-        whitelist_file = os.path.join(base_path, whitelist_file)
+        followed_file = followed_file
+        unfollowed_file = unfollowed_file
+        skipped_file = skipped_file
+        friends_file = friends_file
+        comments_file = comments_file
+        blacklist_file = blacklist_file
+        whitelist_file = whitelist_file
 
         # Database files
         self.followed_file = utils.file(followed_file)
