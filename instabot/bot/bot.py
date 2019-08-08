@@ -22,8 +22,8 @@ from .bot_direct import (
     approve_pending_thread_requests
 )
 from .bot_filter import (
-    check_media, check_not_bot, check_user, filter_medias
-)
+    check_media, check_not_bot, check_user, filter_medias,
+    search_blacklist_hashtags_in_media)
 from .bot_follow import (
     follow, follow_followers, follow_following,
     follow_users, approve_pending_follow_requests, reject_pending_follow_requests
