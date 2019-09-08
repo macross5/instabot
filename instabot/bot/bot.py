@@ -32,7 +32,7 @@ from .bot_direct import (
     send_photo,
     send_profile,
 )
-from .bot_filter import check_media, check_not_bot, check_user, filter_medias
+from .bot_filter import check_media, check_not_bot, check_user, filter_medias, search_blacklist_hashtags_in_media
 from .bot_follow import (
     approve_pending_follow_requests,
     follow,
@@ -257,13 +257,13 @@ class Bot(object):
         self._usernames = {}  # `username` to `user_id` mapping
 
         # Adjust file paths
-        followed_file = os.path.join(base_path, followed_file)
-        unfollowed_file = os.path.join(base_path, unfollowed_file)
-        skipped_file = os.path.join(base_path, skipped_file)
-        friends_file = os.path.join(base_path, friends_file)
-        comments_file = os.path.join(base_path, comments_file)
-        blacklist_file = os.path.join(base_path, blacklist_file)
-        whitelist_file = os.path.join(base_path, whitelist_file)
+        followed_file = followed_file
+        unfollowed_file = unfollowed_file
+        skipped_file = skipped_file
+        friends_file = friends_file
+        comments_file = comments_file
+        blacklist_file = blacklist_file
+        whitelist_file = whitelist_file
 
         # Database files
         self.followed_file = utils.file(followed_file)
@@ -861,6 +861,9 @@ class Bot(object):
 
     def check_media(self, media):
         return check_media(self, media)
+
+    def search_blacklist_hashtags_in_media(self, media):
+        return search_blacklist_hashtags_in_media(self, media)
 
     def check_user(self, user, unfollowing=False):
         return check_user(self, user, unfollowing)

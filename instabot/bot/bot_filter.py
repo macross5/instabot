@@ -115,7 +115,15 @@ def search_blacklist_hashtags_in_media(self, media_id):
     for i in range(0, comments_number):
         text += "".join(media_comments[i]["text"])
 
-    return any((h in text) for h in self.blacklist_hashtags)
+    text = text.split()
+        
+    for h in self.blacklist_hashtags:
+        for t in text:
+            if h == t:
+                self.logger.info("Blacklisted hashtag in media found: " + str(h))
+                return True
+
+    return False
 
 
 def check_user(self, user_id, unfollowing=False):  # noqa: C901

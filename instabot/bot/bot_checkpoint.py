@@ -42,9 +42,8 @@ class Checkpoint(object):
 
 def save_checkpoint(self):
     checkpoint = Checkpoint(self)
-    fname = CHECKPOINT_PATH.format(fname=self.api.username)
-    fname = os.path.join(self.base_path, fname)
-    with open(fname, "wb") as f:
+    fname = self.api.username+'/'+CHECKPOINT_PATH.format(fname=self.api.username)
+    with open(fname, 'wb') as f:
         pickle.dump(checkpoint, f, -1)
     return True
 

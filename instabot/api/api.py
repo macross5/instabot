@@ -46,7 +46,7 @@ PY2 = sys.version_info[0] == 2
 
 
 class API(object):
-    def __init__(self, device=None, base_path="", save_logfile=True, log_filename=None):
+    def __init__(self, device=None, base_path="", save_logfile=True, log_filename='instabot.log'):
         # Setup device and user_agent
         self.device = device or devices.DEFAULT_DEVICE
 
