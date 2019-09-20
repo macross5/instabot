@@ -46,7 +46,7 @@ PY2 = sys.version_info[0] == 2
 
 
 class API(object):
-    def __init__(self, device=None, base_path="", save_logfile=True, log_filename='instabot.log'):
+    def __init__(self, device=None, base_path="", save_logfile=True, log_filename=None):
         # Setup device and user_agent
         self.device = device or devices.DEFAULT_DEVICE
 
@@ -68,7 +68,7 @@ class API(object):
         if save_logfile is True:
             if log_filename is None:
                 log_filename = os.path.join(
-                    base_path, "instabot_{}.log".format(id(self))
+                    base_path, "instabot.log"
                 )
 
             fh = logging.FileHandler(filename=log_filename)

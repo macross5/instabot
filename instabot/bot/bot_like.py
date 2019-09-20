@@ -54,7 +54,7 @@ def like(
         if _r == "feedback_required":
             self.logger.error("`Like` action has been BLOCKED...!!!")
             self.blocked_actions["likes"] = True
-            return False
+            return "feedback_required"
         if _r:
             self.logger.info("Liked media %s." % media_id)
             self.total["likes"] += 1
